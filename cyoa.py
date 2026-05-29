@@ -7,135 +7,88 @@
 # Each branch -> 2 endings
 
 
-def ending(text):
-    print("\n" + text)
-    print("\n=== THE END ===")
+import os
+from dotenv import load_dotenv
+from openai import OpenAI
+
+load_dotenv()
+
+client = OpenAI(
+    api_key=os.getenv("GPT_API_KEY")
+)
 
 
-print("Welcome to the Choose Your Own Adventure Game!")
-print("You wake up at the edge of a mysterious land.")
 
-print("\nChoose your starting path:")
-print("1. Enter the Dark Forest")
-print("2. Explore the Ancient Castle")
+def ai_continue(story_context):
+    response = client.chat.completions.create(
+        model="gpt-5.5",
+        messages=[
+            {
+                "role": "system",
+                "content": (
+                    "You are continuing a fantasy choose-your-own-adventure game. "
+                    "Write a short continuation and give exactly 3 choices."
+                )
+            },
+            {
+                "role": "user",
+                "content": story_context
+            }
+        ],
+        temperature=0.9
+    )
 
-start_choice = input("> ")
+    return response.choices[0].message.content
 
-# ---------------- FOREST PATH ----------------
-if start_choice == "1":
-    print("\nYou step into the Dark Forest.")
-    print("Choose what to do:")
-    print("1. Follow the glowing river")
-    print("2. Climb the giant tree")
-    print("3. Enter the hidden cave")
+
+print("Welcome to the Adventure!")
+
+print("\nChoose a path:")
+print("1. Forest")
+print("2. Castle")
+
+choice = input("> ")
+
+# ---------------- FOREST ----------------
+if choice == "1":
+    print("\nYou enter the forest.")
+    print("1. Follow the river")
+    print("2. Enter the cave")
 
     forest_choice = input("> ")
 
-    # River branch
     if forest_choice == "1":
-        print("\nThe glowing river hums with magic.")
-        print("1. Drink the water")
-        print("2. Follow the river downstream")
+        print("\nYou discover glowing water.")
+        print("1. Drink it")
+        print("2. Ignore it")
 
         river_choice = input("> ")
 
         if river_choice == "1":
-            ending("You gain magical powers and become guardian of the forest!")
+            print("\nThe magic transforms you into a forest guardian.")
+            print("\n--- AI CONTINUES THE STORY ---\n")
+
+            ai_story = ai_continue(
+                "The player became a forest guardian after drinking magical water."
+            )
+
+            print(ai_story)
+
         elif river_choice == "2":
-            ending("You discover a hidden village filled with treasure!")
+            print("\nYou safely continue your journey.")
+
         else:
             print("Invalid choice.")
 
-    # Tree branch
     elif forest_choice == "2":
-        print("\nYou climb the giant tree and see the entire forest.")
-        print("1. Build a treehouse")
-        print("2. Jump to a nearby branch")
-
-        tree_choice = input("> ")
-
-        if tree_choice == "1":
-            ending("You live peacefully among the birds for the rest of your days.")
-        elif tree_choice == "2":
-            ending("You fall into a hidden net and are rescued by friendly elves.")
-        else:
-            print("Invalid choice.")
-
-    # Cave branch
-    elif forest_choice == "3":
-        print("\nInside the cave, glowing crystals light the walls.")
-        print("1. Take a crystal")
-        print("2. Go deeper into the cave")
-
-        cave_choice = input("> ")
-
-        if cave_choice == "1":
-            ending("The crystal grants you endless good luck!")
-        elif cave_choice == "2":
-            ending("You awaken an ancient dragon who shares its wisdom.")
-        else:
-            print("Invalid choice.")
+        print("\nA dragon sleeps inside the cave.")
 
     else:
         print("Invalid choice.")
 
-# ---------------- CASTLE PATH ----------------
-elif start_choice == "2":
-    print("\nYou arrive at the Ancient Castle.")
-    print("Choose where to go:")
-    print("1. Enter the throne room")
-    print("2. Explore the dungeon")
-    print("3. Climb the castle tower")
-
-    castle_choice = input("> ")
-
-    # Throne room branch
-    if castle_choice == "1":
-        print("\nThe throne room is silent and dusty.")
-        print("1. Sit on the throne")
-        print("2. Search behind the throne")
-
-        throne_choice = input("> ")
-
-        if throne_choice == "1":
-            ending("You are crowned the new ruler of the kingdom!")
-        elif throne_choice == "2":
-            ending("You discover a secret passage to a vault of gold.")
-        else:
-            print("Invalid choice.")
-
-    # Dungeon branch
-    elif castle_choice == "2":
-        print("\nThe dungeon is cold and filled with chains.")
-        print("1. Open a prison cell")
-        print("2. Light a torch")
-
-        dungeon_choice = input("> ")
-
-        if dungeon_choice == "1":
-            ending("A trapped wizard rewards you with magical armor.")
-        elif dungeon_choice == "2":
-            ending("You uncover ancient writings that reveal hidden secrets.")
-        else:
-            print("Invalid choice.")
-
-    # Tower branch
-    elif castle_choice == "3":
-        print("\nAt the top of the tower, the wind howls loudly.")
-        print("1. Ring the giant bell")
-        print("2. Look through the telescope")
-
-        tower_choice = input("> ")
-
-        if tower_choice == "1":
-            ending("The bell summons a legendary phoenix!")
-        elif tower_choice == "2":
-            ending("You spot a new land beyond the mountains and begin a new adventure.")
-        else:
-            print("Invalid choice.")
-
-    else:
-        print("Invalid choice.")
+# ---------------- CASTLE ----------------
+elif choice == "2":
+    print("\nYou approach the ancient castle.")
 
 else:
-    print("Invalid starting choice.")
+    print("Invalid choice.")
