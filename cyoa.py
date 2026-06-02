@@ -45,6 +45,8 @@ def ai_continue(story_context):
                 "content": story_context
             }
         ],
+        # temperature cannot be changed here, if you want temperature
+        # to change it's possible to do so in cyoa2.py
         temperature=1
     )
 

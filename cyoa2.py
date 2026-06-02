@@ -10,6 +10,8 @@
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
+# To get line 12 to work, you might need to run this line on the terminal:
+# python -m pip install openai
 
 # Load environment variables from .env
 load_dotenv()
