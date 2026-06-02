@@ -9,8 +9,11 @@
 
 import os
 from dotenv import load_dotenv
+# To get previous to work, you might need to run this line on the terminal:
+# python -m pip install python-dotenv
+
 from openai import OpenAI
-# To get line 12 to work, you might need to run this line on the terminal:
+# To get previous, you might need to run this line on the terminal:
 # python -m pip install openai
 
 # Load environment variables from .env
