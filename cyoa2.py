@@ -43,6 +43,8 @@ def ai_continue(story_context):
                 "content": story_context
             }
         ],
+        # temperature can be set anywhere from 0 to 2 (including decimals)
+        # where 0 gives deterministic answers and 2 gives random, creative, answers.
         temperature=0
     )
 
