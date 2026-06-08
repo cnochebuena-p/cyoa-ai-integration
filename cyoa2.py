@@ -50,7 +50,7 @@ def ai_continue(story_context):
         ],
         # temperature can be set anywhere from 0 to 2 (including decimals)
         # where 0 gives deterministic answers and 2 gives random, creative, answers.
-        temperature=0
+        temperature=1
     )
 
     return response.choices[0].message.content
@@ -134,6 +134,10 @@ if choice == "1":
                 "\nYou safely continue your journey."
             )
 
+            start_ai_loop(
+                "The player ignores the glowing water and continues their journey."
+            )
+
         else:
             print("Invalid choice.")
 
@@ -207,6 +211,10 @@ elif choice == "2":
                 "\nYou escape the castle safely."
             )
 
+            start_ai_loop(
+                "The player escapes and runs away from the castle."
+            )
+
         else:
             print("Invalid choice.")
 
@@ -236,6 +244,11 @@ elif choice == "2":
             print(
                 "\nThe tower begins collapsing around you!"
             )
+
+            start_ai_loop(
+                "The player's choice led to the tower collapsing."
+            )
+
 
         else:
             print("Invalid choice.")
