@@ -249,7 +249,6 @@ elif choice == "2":
                 "The player's choice led to the tower collapsing."
             )
 
-
         else:
             print("Invalid choice.")
 
