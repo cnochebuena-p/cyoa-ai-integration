@@ -35,7 +35,9 @@ def ai_continue(story_context):
                 "content": (
                     "You are continuing a fantasy choose-your-own-adventure game.\n"
                     "Keep the story exciting and immersive.\n"
-                    "Always give EXACTLY 3 choices at the end.\n"
+                    "Have a 20 percent chance of your response ending \n"
+                    "the game, in which case do not give 3 choices at the end. \n"
+                    "Otherwise, give EXACTLY 3 choices at the end.\n"
                     "Keep responses under 200 words.\n"
                     "Format choices exactly like this:\n"
                     "1. Choice one\n"
@@ -134,6 +136,10 @@ if choice == "1":
                 "\nYou safely continue your journey."
             )
 
+            start_ai_loop(
+                "The player ignores the glowing water and continues their journey."
+            )
+
         else:
             print("Invalid choice.")
 
@@ -162,6 +168,10 @@ if choice == "1":
 
             print(
                 "\nThe dragon awakens and stares directly into your soul."
+            )
+
+            start_ai_loop(
+                "The player wakes the dragon, which stares directly into the player's soul."
             )
 
         else:
@@ -207,6 +217,10 @@ elif choice == "2":
                 "\nYou escape the castle safely."
             )
 
+            start_ai_loop(
+                "The player escapes and runs away from the castle."
+            )
+
         else:
             print("Invalid choice.")
 
@@ -235,6 +249,10 @@ elif choice == "2":
 
             print(
                 "\nThe tower begins collapsing around you!"
+            )
+
+            start_ai_loop(
+                "The player's choice led to the tower collapsing."
             )
 
         else:

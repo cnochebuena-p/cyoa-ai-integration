@@ -35,7 +35,9 @@ def ai_continue(story_context):
                 "content": (
                     "You are continuing a fantasy choose-your-own-adventure game.\n"
                     "Keep the story exciting and immersive.\n"
-                    "Always give EXACTLY 3 choices at the end.\n"
+                    "Have a 20 percent chance of your response ending \n"
+                    "the game, in which case do not give 3 choices at the end. \n"
+                    "Otherwise, give EXACTLY 3 choices at the end.\n"
                     "Keep responses under 200 words.\n"
                     "Format choices exactly like this:\n"
                     "1. Choice one\n"
@@ -50,7 +52,7 @@ def ai_continue(story_context):
         ],
         # temperature can be set anywhere from 0 to 2 (including decimals)
         # where 0 gives deterministic answers and 2 gives random, creative, answers.
-        temperature=1
+        temperature=1.9
     )
 
     return response.choices[0].message.content
@@ -166,6 +168,10 @@ if choice == "1":
 
             print(
                 "\nThe dragon awakens and stares directly into your soul."
+            )
+
+            start_ai_loop(
+                "The player wakes the dragon, which stares directly into the player's soul."
             )
 
         else:
